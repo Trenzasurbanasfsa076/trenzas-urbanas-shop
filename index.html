@@ -948,27 +948,118 @@ Total: $<span id="total">0</span>
 </button>
 
 </div>
-function toggleCarrito(){
-document.getElementById("carrito").classList.toggle("oculto");
-}
+
 <script>
 
-// AQUÍ VA TODO EL CÓDIGO JAVASCRIPT
-// (sumar, restar, agregarCarrito, actualizarCarrito,
-// LocalStorage, buscador, etc.)
+// =========================
+// FUNCION WHATSAPP
+// =========================
 
 function enviarWhatsApp(){
 
-const numero="5493705141113";
+const numero = "5493705141113";
 
-let mensaje="Hola, este es mi pedido:%0A%0A";
+let mensaje = "Hola, este es mi pedido:%0A%0A";
 
-window.open("https://wa.me/"+numero+"?text="+mensaje,"_blank");
+// si tenés carrito, esto lo mejora después
+// por ahora envía mensaje base
 
+window.open("https://wa.me/" + numero + "?text=" + mensaje, "_blank");
+
+}
+
+// =========================
+// CARRITO (BÁSICO FUNCIONAL)
+// =========================
+
+let carrito = [];
+
+function agregarCarrito(index){
+
+let nombre = document.querySelectorAll(".nombre")[index].innerText;
+
+let precioTexto = document.querySelectorAll(".precio")[index].innerText;
+
+let precio = parseInt(precioTexto.replace("$","").replace(".",""));
+
+let cantidad = parseInt(document.getElementById("cant"+index).innerText);
+
+carrito.push({
+nombre,
+precio,
+cantidad
+});
+
+actualizarCarrito();
+
+}
+
+function sumar(index){
+
+let el = document.getElementById("cant"+index);
+
+el.innerText = parseInt(el.innerText) + 1;
+
+}
+
+function restar(index){
+
+let el = document.getElementById("cant"+index);
+
+if(parseInt(el.innerText) > 1){
+el.innerText = parseInt(el.innerText) - 1;
+}
+
+}
+
+function actualizarCarrito(){
+
+let lista = document.getElementById("listaCarrito");
+
+let total = 0;
+
+lista.innerHTML = "";
+
+carrito.forEach((p,i)=>{
+
+total += p.precio * p.cantidad;
+
+lista.innerHTML += `
+<div class="item">
+<span>${p.nombre} x${p.cantidad}</span>
+<div>
+$${(p.precio * p.cantidad).toLocaleString("es-AR")}
+<button onclick="eliminar(${i})">✖</button>
+</div>
+</div>
+`;
+
+});
+
+document.getElementById("total").innerText = total.toLocaleString("es-AR");
+
+document.getElementById("contador").innerText = carrito.length;
+
+if(carrito.length === 0){
+lista.innerHTML = "<p style='text-align:center;color:#666;'>Tu carrito está vacío</p>";
+}
+
+}
+
+function eliminar(i){
+carrito.splice(i,1);
+actualizarCarrito();
+}
+
+// =========================
+// CARRITO DESPLEGABLE
+// =========================
+
+function toggleCarrito(){
+document.getElementById("carrito").classList.toggle("oculto");
 }
 
 </script>
 
 </body>
-
 </html>
