@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Trenzas Urbanas Shop</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins,sans-serif;
+}
+
+body{
+
+background:linear-gradient(180deg,#4B0082,#6A0DAD,#8A2BE2);
+
+color:#fff;
+
+}
+
+header{
+
+background:#3A0068;
+
+padding:25px;
+
+text-align:center;
+
+box-shadow:0 4px 15px rgba(0,0,0,.35);
+
+position:sticky;
+
+top:0;
+
+z-index:999;
+
+}
+
+header h1{
+
+font-size:38px;
+
+font-weight:800;
+
+}
+
+header p{
+
+margin-top:8px;
+
+opacity:.9;
+
+}
+
+.buscador{
+
+width:95%;
+
+max-width:700px;
+
+margin:25px auto;
+
+display:flex;
+
+}
+
+.buscador input{
+
+width:100%;
+
+padding:15px;
+
+border:none;
+
+border-radius:15px;
+
+font-size:16px;
+
+outline:none;
+
+}
+
+.container{
+
+width:95%;
+
+max-width:1400px;
+
+margin:auto;
+
+padding-bottom:150px;
+
+}
+
+.produtos{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+
+gap:25px;
+
+}
+
+.card{
+
+background:#fff;
+
+border-radius:20px;
+
+overflow:hidden;
+
+color:#222;
+
+box-shadow:0 8px 25px rgba(0,0,0,.25);
+
+transition:.3s;
+
+}
+
+.card:hover{
+
+transform:translateY(-6px);
+
+}
+
+.imagen{
+
+height:240px;
+
+background:#efefef;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+overflow:hidden;
+
+}
+
+.imagen img{
+
+width:100%;
+
+height:100%;
+
+object-fit:cover;
+
+}
+
+.info{
+
+padding:18px;
+
+}
+
+.nombre{
+
+font-size:18px;
+
+font-weight:700;
+
+margin-bottom:10px;
+
+}
+
+.descripcion{
+
+font-size:14px;
+
+color:#666;
+
+margin-bottom:12px;
+
+}
+
+.precio{
+
+font-size:28px;
+
+font-weight:800;
+
+color:#6A0DAD;
+
+margin-bottom:15px;
+
+}
+
+.cantidad{
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+gap:15px;
+
+margin-bottom:15px;
+
+}
+
+.cantidad button{
+
+width:40px;
+
+height:40px;
+
+border:none;
+
+border-radius:10px;
+
+background:#6A0DAD;
+
+color:white;
+
+font-size:22px;
+
+cursor:pointer;
+
+}
+
+.cantidad span{
+
+font-size:20px;
+
+font-weight:bold;
+
+min-width:25px;
+
+text-align:center;
+
+}
+
+.agregar{
+
+width:100%;
+
+padding:14px;
+
+background:#6A0DAD;
+
+border:none;
+
+border-radius:12px;
+
+color:white;
+
+font-size:16px;
+
+font-weight:700;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+.agregar:hover{
+
+background:#4B0082;
+
+}
+
+#carrito{
+
+position:fixed;
+
+right:20px;
+
+bottom:20px;
+
+width:360px;
+
+background:white;
+
+color:#222;
+
+border-radius:20px;
+
+padding:20px;
+
+box-shadow:0 10px 35px rgba(0,0,0,.35);
+
+z-index:999;
+
+max-height:80vh;
+
+overflow:auto;
+
+}
+
+#carrito h2{
+
+color:#6A0DAD;
+
+text-align:center;
+
+margin-bottom:15px;
+
+}
+
+.contador{
+
+position:absolute;
+
+top:-10px;
+
+right:-10px;
+
+width:28px;
+
+height:28px;
+
+border-radius:50%;
+
+background:red;
+
+color:white;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+font-size:14px;
+
+font-weight:bold;
+
+}
+
+.item{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+margin:12px 0;
+
+border-bottom:1px solid #eee;
+
+padding-bottom:8px;
+
+}
+
+.item button{
+
+background:red;
+
+color:white;
+
+border:none;
+
+padding:5px 10px;
+
+border-radius:8px;
+
+cursor:pointer;
+
+}
+
+.total{
+
+margin-top:15px;
+
+font-size:22px;
+
+font-weight:bold;
+
+text-align:center;
+
+color:#6A0DAD;
+
+}
+
+.finalizar{
+
+width:100%;
+
+margin-top:15px;
+
+padding:15px;
+
+border:none;
+
+border-radius:12px;
+
+background:#25D366;
+
+color:white;
+
+font-size:18px;
+
+font-weight:bold;
+
+cursor:pointer;
+
+}
+
+@media(max-width:768px){
+
+#carrito{
+
+position:relative;
+
+width:100%;
+
+right:0;
+
+bottom:0;
+
+margin-top:30px;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>💜 Trenzas Urbanas Shop</h1>
+
+<p>Todo para tus trenzas en un solo lugar</p>
+
+</header>
+
+<div class="buscador">
+
+<input
+type="text"
+id="buscar"
+placeholder="🔍 Buscar productos...">
+
+</div>
+
+<div class="container">
+
+<div class="produtos">
+
+<!-- PRODUCTO 1 -->
+<div class="card">
+
+<div class="imagen">
+<img src="img/producto1.jpg" alt="Gel Natural Fix">
+</div>
+
+<div class="info">
+
+<div class="nombre">
+Gel Efecto Húmedo Natural Fix x 1 Kg - Fidelité
+</div>
+
+<div class="descripcion">
+Fijación natural ideal para peinados y trenzas.
+</div>
+
+<div class="precio">$8.700</div>
+
+<div class="cantidad">
+
+<button onclick="restar(0)">−</button>
+
+<span id="cant0">1</span>
+
+<button onclick="sumar(0)">+</button>
+
+</div>
+
+<button class="agregar" onclick="agregarCarrito(0)">
+Agregar al carrito
+</button>
+
+</div>
+
+</div>
+
+<!-- PRODUCTO 2 -->
+
+<div class="card">
+
+<div class="imagen">
+<img src="img/producto2.jpg" alt="Super Fix">
+</div>
+
+<div class="info">
+
+<div class="nombre">
+Gel Super Fix x 1 Kg - Fidelité
+</div>
+
+<div class="descripcion">
+Fijación extrema de larga duración.
+</div>
+
+<div class="precio">$15.800</div>
+
+<div class="cantidad">
+
+<button onclick="restar(1)">−</button>
+
+<span id="cant1">1</span>
+
+<button onclick="sumar(1)">+</button>
+
+</div>
+
+<button class="agregar" onclick="agregarCarrito(1)">
+Agregar al carrito
+</button>
+
+</div>
+
+</div>
+
+<!-- PRODUCTO 3 -->
+
+<div class="card">
+
+<div class="imagen">
+<img src="img/producto3.jpg" alt="Super Fix 230">
+</div>
+
+<div class="info">
+
+<div class="nombre">
+Gel Super Fix x 230 ml - Fidelité
+</div>
+
+<div class="descripcion">
+Extra duración para peinados impecables.
+</div>
+
+<div class="precio">$7.100</div>
+
+<div class="cantidad">
+
+<button onclick="restar(2)">−</button>
+
+<span id="cant2">1</span>
+
+<button onclick="sumar(2)">+</button>
+
+</div>
+
+<button class="agregar" onclick="agregarCarrito(2)">
+Agregar al carrito
+</button>
+
+</div>
+
+</div>
+<!-- PRODUCTO 4 -->
+<div class="card">
+
+<div class="imagen">
+<img src="img/producto4.jpg" alt="Beauty Walfor Extra Duro 450">
+</div>
+
+<div class="info">
+
+<div class="nombre">Gel Fijador Premium Extra Duro 450 g - Beauty Walfor</div>
+
+<div class="descripcion">Ideal para trenzas y peinados de larga duración.</div>
+
+<div class="precio">$6.700</div>
+
+<div class="cantidad">
+<button onclick="restar(3)">−</button>
+<span id="cant3">1</span>
+<button onclick="sumar(3)">+</button>
+</div>
+
+<button class="agregar" onclick="agregarCarrito(3)">
+Agregar al carrito
+</button>
+
+</div>
+
+</div>
+
+<!-- PRODUCTO 5 -->
+<div class="card">
+
+<div class="imagen">
+<img src="img/producto5.jpg" alt="Beauty Walfor Extra Duro 250">
+</div>
+
+<div class="info">
+
+<div class="nombre">Gel Fijador Premium Extra Duro 250 g - Beauty Walfor</div>
+
+<div class="descripcion">Fijación fuerte para uso diario.</div>
+
+<div class="precio">$4.300</div>
+
+<div class="cantidad">
+<button onclick="restar(4)">−</button>
+<span id="cant4">1</span>
+<button onclick="sumar(4)">+</button>
+</div>
+
+<button class="agregar" onclick="agregarCarrito(4)">
+Agregar al carrito
+</button>
+
+</div>
+
+</div>
+
+<!-- PRODUCTO 6 -->
+<div class="card">
+
+<div class="imagen">
+<img src="img/producto6.jpg" alt="Beauty Walfor Extra Duro 900">
+</div>
+
+<div class="info">
+
+<div class="nombre">Gel Fijador Premium Extra Duro 900 g - Beauty Walfor</div>
+
+<div class="descripcion">Presentación grande para uso profesional.</div>
+
+<div class="precio">$12.000</div>
+
+<div class="cantidad">
+<button onclick="restar(5)">−</button>
+<span id="cant5">1</span>
+<button onclick="sumar(5)">+</button>
+</div>
+
+<button class="agregar" onclick="agregarCarrito(5)">
+Agregar al carrito
+</button>
+
+</div>
+
+</div>
+
+<!-- PRODUCTO 7 -->
+<div class="card">
+
+<div class="imagen">
+<img src="img/producto7.jpg" alt="Beauty Walfor Cemento 450">
+</div>
+
+<div class="info">
+
+<div class="nombre">Gel Fijador Premium Cemento 450 g - Beauty Walfor</div>
+
+<div class="descripcion">Máxima fijación para peinados exigentes.</div>
+
+<div class="precio">$6.700</div>
+
+<div class="cantidad">
+<button onclick="restar(6)">−</button>
+<span id="cant6">1</span>
+<button onclick="sumar(6)">+</button>
+</div>
+
+<button class="agregar" onclick="agregarCarrito(6)">
+Agregar al carrito
+</button>
+
+</div>
+
+</div>
+<!-- PRODUCTO 8 -->
+<div class="card">
+
+<div class="imagen">
+<img src="img/producto8.jpg" alt="Beauty Walfor Cemento 900">
+</div>
+
+<div class="info">
+
+<div class="nombre">
+Gel Fijador Premium Cemento 900 g - Beauty Walfor
+</div>
+
+<div class="descripcion">
+Máxima fijación para uso profesional.
+</div>
+
+<div class="precio">$12.000</div>
+
+<div class="cantidad">
+<button onclick="restar(7)">−</button>
+<span id="cant7">1</span>
+<button onclick="sumar(7)">+</button>
+</div>
+
+<button class="agregar" onclick="agregarCarrito(7)">
+Agregar al carrito
+</button>
+
+</div>
+
+</div>
+
+<!-- PRODUCTO 9 -->
+
+<div class="card">
+
+<div class="imagen">
+<img src="img/producto9.jpg" alt="Hair Fix 900">
+</div>
+
+<div class="info">
+
+<div class="nombre">
+Gel Fijador Premium Hair Fix 900 g - Beauty Walfor
+</div>
+
+<div class="descripcion">
+Ideal para trenzas y peinados de larga duración.
+</div>
+
+<div class="precio">$12.000</div>
+
+<div class="cantidad">
+<button onclick="restar(8)">−</button>
+<span id="cant8">1</span>
+<button onclick="sumar(8)">+</button>
+</div>
+
+<button class="agregar" onclick="agregarCarrito(8)">
+Agregar al carrito
+</button>
+
+</div>
+
+</div>
+
+<!-- PRODUCTO 10 -->
+
+<div class="card">
+
+<div class="imagen">
+<img src="img/producto10.jpg" alt="Shine Jam 113">
+</div>
+
+<div class="info">
+
+<div class="nombre">
+Shine Jam Conditioning Gel x 113 g
+</div>
+
+<div class="descripcion">
+Especial para realizar trenzas con excelente acabado.
+</div>
+
+<div class="precio">$5.600</div>
+
+<div class="cantidad">
+<button onclick="restar(9)">−</button>
+<span id="cant9">1</span>
+<button onclick="sumar(9)">+</button>
+</div>
+
+<button class="agregar" onclick="agregarCarrito(9)">
+Agregar al carrito
+</button>
+
+</div>
+
+</div>
+
+<!-- PRODUCTO 11 -->
+
+<div class="card">
+
+<div class="imagen">
+<img src="img/producto11.jpg" alt="Shine Jam 227">
+</div>
+
+<div class="info">
+
+<div class="nombre">
+Shine Jam Conditioning Gel x 227 g
+</div>
+
+<div class="descripcion">
+Mayor contenido para uso frecuente.
+</div>
+
+<div class="precio">$9.000</div>
+
+<div class="cantidad">
+<button onclick="restar(10)">−</button>
+<span id="cant10">1</span>
+<button onclick="sumar(10)">+</button>
+</div>
+
+<button class="agregar" onclick="agregarCarrito(10)">
+Agregar al carrito
+</button>
+
+</div>
+
+</div>
+
+<!-- PRODUCTO 12 -->
+
+<div class="card">
+
+<div class="imagen">
+<img src="img/producto12.jpg" alt="Durag Deluxe">
+</div>
+
+<div class="info">
+
+<div class="nombre">
+Gorro de Satén DU-RAG Deluxe
+</div>
+
+<div class="descripcion">
+Protege tus trenzas y ayuda a mantener el peinado por más tiempo.
+</div>
+
+<div class="precio">$4.800</div>
+
+<div class="cantidad">
+<button onclick="restar(11)">−</button>
+<span id="cant11">1</span>
+<button onclick="sumar(11)">+</button>
+</div>
+
+<button class="agregar" onclick="agregarCarrito(11)">
+Agregar al carrito
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- Fin del catálogo -->
+</div>
+
+<div id="carrito">
+
+<h2>🛒 Mi carrito <span class="contador" id="contador">0</span></h2>
+
+<div id="listaCarrito">
+
+<p style="text-align:center;color:#666;">
+Tu carrito está vacío.
+</p>
+
+</div>
+
+<div class="total">
+Total: $<span id="total">0</span>
+</div>
+
+<button class="finalizar" onclick="enviarWhatsApp()">
+📲 Enviar pedido por WhatsApp
+</button>
+
+</div>
+
+<script>
+
+// AQUÍ VA TODO EL CÓDIGO JAVASCRIPT
+// (sumar, restar, agregarCarrito, actualizarCarrito,
+// LocalStorage, buscador, etc.)
+
+function enviarWhatsApp(){
+
+const numero="5493705141113";
+
+let mensaje="Hola, este es mi pedido:%0A%0A";
+
+window.open("https://wa.me/"+numero+"?text="+mensaje,"_blank");
+
+}
+
+</script>
+
+</body>
+
+</html>
