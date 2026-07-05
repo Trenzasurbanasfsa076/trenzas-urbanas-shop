@@ -430,7 +430,72 @@ margin-top:30px;
 }
 
 }
+#botonCarrito{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#6A0DAD;
+color:white;
+width:60px;
+height:60px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:22px;
+cursor:pointer;
+box-shadow:0 10px 20px rgba(0,0,0,.3);
+z-index:9999;
+}
 
+#botonCarrito span{
+position:absolute;
+top:-5px;
+right:-5px;
+background:red;
+width:22px;
+height:22px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:12px;
+}
+
+#carrito{
+position:fixed;
+bottom:90px;
+right:20px;
+width:320px;
+background:white;
+color:#222;
+border-radius:15px;
+padding:15px;
+box-shadow:0 10px 30px rgba(0,0,0,.3);
+z-index:9999;
+max-height:70vh;
+overflow:auto;
+}
+
+.oculto{
+display:none;
+}
+
+.carrito-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:10px;
+}
+
+.carrito-header button{
+background:red;
+color:white;
+border:none;
+padding:5px 10px;
+border-radius:8px;
+cursor:pointer;
+}
 </style>
 
 </head>
@@ -859,28 +924,33 @@ Agregar al carrito
 <!-- Fin del catálogo -->
 </div>
 
-<div id="carrito">
-
-<h2>🛒 Mi carrito <span class="contador" id="contador">0</span></h2>
-
-<div id="listaCarrito">
-
-<p style="text-align:center;color:#666;">
-Tu carrito está vacío.
-</p>
-
+<!-- BOTÓN FLOTANTE -->
+<div id="botonCarrito" onclick="toggleCarrito()">
+🛒 <span id="contador">0</span>
 </div>
+
+<!-- CARRITO DESPLEGABLE -->
+<div id="carrito" class="oculto">
+
+<div class="carrito-header">
+<h2>🛒 Mi carrito</h2>
+<button onclick="toggleCarrito()">✖</button>
+</div>
+
+<div id="listaCarrito"></div>
 
 <div class="total">
 Total: $<span id="total">0</span>
 </div>
 
 <button class="finalizar" onclick="enviarWhatsApp()">
-📲 Enviar pedido por WhatsApp
+📲 Enviar pedido
 </button>
 
 </div>
-
+function toggleCarrito(){
+document.getElementById("carrito").classList.toggle("oculto");
+}
 <script>
 
 // AQUÍ VA TODO EL CÓDIGO JAVASCRIPT
